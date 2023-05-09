@@ -1,8 +1,9 @@
 import React from "react";
 import { expect }  from "chai";
 import { shallow } from "enzyme";
+import Sinon from "sinon";
 
-import App from "./App";
+import App, { SYMBOLS } from "./App";
 import GuessCount from "./GuessCount";
 
 describe('<App />', () => {
@@ -16,4 +17,14 @@ describe('<App />', () => {
         const wrapper = shallow(<App />)
         expect(wrapper.find('Card')).to.have.length(36)
     })
+    it('doit correspondre au referent snapshot', ()=> {
+        const mock = Sinon.stub(App.prototype, 'generateCards').returns([...SYMBOLS.repeat(2)])
+        try{
+            const wrapper = shallow(<App />)
+            expect(wrapper).to.matchSnapshot()
+        } finally {
+            mock.restore()
+        }
+    }
+    )
 })

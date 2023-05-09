@@ -1,0 +1,9 @@
+.conpt *{
+    font-size: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.conpt1{
+    flex-direction: row;
+}
